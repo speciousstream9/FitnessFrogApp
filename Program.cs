@@ -6,7 +6,7 @@ namespace Treehouse.FitnessFrog
     {
         static void Main()
         {
-            int runningTotal = 0;
+            double runningTotal = 0;
 
             bool keepGoing = true;
             while(keepGoing)
@@ -15,47 +15,41 @@ namespace Treehouse.FitnessFrog
                 Console.Write("Enter how many minutes you exercised or type \"quit\" to exit: ");
                 string entry = Console.ReadLine();        
 
-                if(entry == "quit")
+                if(entry.ToLower == "quit")
                 {
                     keepGoing = false;
                 }
                 else
                 {
-                    try
+                    // Add minutes exercised to total 
+                    double minutes = double.Parse(entry);
+
+                  if(minutes <= 0)
+                  {
+                    Console.WriteLine(minutes + " is not an acceptable value.");
+                    continue;
+                  }
+                 else if(minutes <= 10)
                     {
-                        // Add minutes exercised to total 
-                        int minutes = int.Parse(entry);
-
-                        if(minutes <= 0)
-                        {
-                            Console.WriteLine(minutes + " is not an acceptable value.");
-                            continue;
-                        }
-                        else if(minutes <= 10)
-                        {
-                            Console.WriteLine("Better than nothing, am I right?");
-                        }
-                        else if(minutes <= 30)
-                        {
-                            Console.WriteLine("Way to go hot stuff!");
-                        }
-                        else if(minutes <= 60)
-                        {
-                            Console.WriteLine("You must be a ninja warrior in training!");
-                        }
-                        else
-                        {        
-                            Console.WriteLine("Okay, now you're just showing off!");
-                        }
-
-                        runningTotal = runningTotal + minutes;
+                        Console.WriteLine("Better than nothing, am I right?");
                     }
-                    catch(FormatException)
+                    else if(minutes <= 30)
                     {
-                        Console.WriteLine("That is not valid input.");
-                        continue;
+                        Console.WriteLine("Way to go hot stuff!");
                     }
-
+                    else if(minutes <= 60)
+                    {
+                        Console.WriteLine("You must be a ninja warrior in training!");
+                    }
+                    else
+                    {        
+                        Console.WriteLine("Okay, now you're just showing off!");
+                    }
+                  
+                   runningTotal = runningTotal + minutes;
+                }
+              catch(FormatException)
+              {
                     // Display total minutes exercised to the screen 
                     Console.WriteLine("You've entered " + runningTotal + " minutes.");
                 }
